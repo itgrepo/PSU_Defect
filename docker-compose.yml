@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            # - "80:80"
+            - "9999:9999"
+        volumes:
+            - ./dist:/usr/share/nginx/html
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+            # - /home/data/intelligist_portal/ssl/star.psu.crt:/etc/nginx/ssl/star.psu.crt
+            # - /home/data/intelligist_portal/ssl/star.psu.key:/etc/nginx/ssl/star.psu.key
+            - /home/administrator/portal_psu/intelligist_portal/ssl/star.psu.crt:/etc/nginx/ssl/star.psu.crt
+            - /home/administrator/portal_psu/intelligist_portal/ssl/star.psu.key:/etc/nginx/ssl/star.psu.key
+        restart: always
+networks:
+    code-network:
+        ipam:
+            config:
+                # - subnet: 10.20.8.0/24
+                - subnet: 10.0.0.0/16
+
+
+
+# networks:
+#     code-network:
+#         driver: bridge
+
+# services:
+#     web:
+#         image: nginx:latest
+#         ports:
+#             - "10390:10390"
+#         volumes:
+#             - ./dist:/usr/share/nginx/html
+#             - ./nginx.conf:/etc/nginx/conf.d/default.conf
+#         networks:
+#             - code-network
+
+# networks:
+#     code-network:
+#         driver: bridge
+

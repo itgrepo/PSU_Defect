@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    web:
+        image: nexus.alm.set:5000/nginx:set-1.14-r02
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./dist:/usr/local/nginx/html
+            - ./nginx.conf:/usr/local/nginx/conf/conf.d/default.conf
+            - ./ssl/internal.databureau.set.crt:/usr/local/nginx/conf/ssl/self-signed.certificate.set.crt
+            - ./ssl/internal.databureau.set.key:/usr/local/nginx/conf/ssl/self-signed.certificate.set.key
+        restart: always
+networks:
+  default:
+      ipam:
+        config:
+          - subnet: 192.168.10.0/24

@@ -1,0 +1,13 @@
+diff a/src/components/publicData/tableFile.vue b/src/components/publicData/tableFile.vue	(rejected hunks)
+@@ -557,9 +557,9 @@
+                 <v-flex xs1 sm2 md2 class="table-ipad text-center">
+                   {{ detailSubCategory.frequency }}
+                 </v-flex>
+-                <v-flex xs1 sm2 md2 class="table-ipad text-center">
++                <!-- <v-flex xs1 sm2 md2 class="table-ipad text-center">
+                   {{ formatDate(detailSubCategory.trans_date) }}
+-                </v-flex>
++                </v-flex> -->
+               </v-layout>
+             </tbody>
+           </table>
