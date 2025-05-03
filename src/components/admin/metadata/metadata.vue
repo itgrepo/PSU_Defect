@@ -97,7 +97,7 @@
                             <v-text-field
                               v-model="sourceData.source_id"
                               required
-                              :rules="RuleEnglish"
+                              :rules="Rules"
                               :placeholder="$t('placeholderText')"
                             ></v-text-field>
                           </h4>
@@ -286,7 +286,7 @@
                         <v-flex xs12 sm12 md7>
                           <h4>
                             <v-text-field
-                              :rules="Rules"
+                              :rules="RuleEnglish"
                               v-model="sourceData.contactor_email"
                               :placeholder="$t('emailPlaceholder')"
                               outlined
@@ -317,7 +317,8 @@
                               multiple
                               persistent-hint
                               small-chips
-                              :rules="Rules" required
+                              :rules="Rules"
+                              required
                             >
                               <template v-slot:no-data>
                                 <v-list-item>
@@ -368,7 +369,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="[v => !!v || 'Please select one']"
+                              :rules="RuleChoices" required
                               column
                             >
                               <v-radio
@@ -445,6 +446,7 @@
                             <v-select
                               :items="Geo"
                               v-model="sourceData.geo_coverage"
+                              :rules="Rules" required
                               dense
                               outlined
                             ></v-select>
@@ -488,6 +490,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -689,9 +692,8 @@
                             >
                               <template v-slot:activator="{ on, attrs }">
                                 <v-text-field
-                                  v-model="displayDate"
-                                  :placeholder="'กรุณาเลือกวันที่'"
-                                  :rules="Rules"
+                                  v-model="displayCreateDate"
+                                  :placeholder="'กรุณาเลือกวันที่'"                                  
                                   :label="$t('dateFormatLabel')"
                                   prepend-icon="mdi-calendar"
                                   readonly
@@ -703,6 +705,7 @@
                                 v-model="sourceData.created_date"
                                 :locale="currentLocale"
                                 @input="menu = false"
+                                :rules="Rules" required
                               ></v-date-picker>
                             </v-menu>
                           </h4>
@@ -726,7 +729,7 @@
                             >
                               <template v-slot:activator="{ on, attr }">
                                 <v-text-field
-                                  v-model="displayDate"
+                                  v-model="displayModifiedDate"
                                   :placeholder="'กรุณาเลือกวันที่'"
                                   :rules="Rules"
                                   :label="$t('dateFormatLabel')"
@@ -740,6 +743,7 @@
                                 v-model="sourceData.modified_date"
                                 :locale="currentLocale"
                                 @input="menu1 = false"
+                                :rules="Rules" required
                               ></v-date-picker>
                             </v-menu>
                           </h4>
@@ -758,6 +762,7 @@
                               :items="yesno"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -775,6 +780,7 @@
                               :items="yesno"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -817,7 +823,7 @@
                             <v-text-field
                               v-model="sourceData.source_id"
                               required
-                              :rules="RuleEnglish"
+                              :rules="Rules"
                               :label="$t('dataSetCodeLabel')"
                             ></v-text-field>
                           </h4>
@@ -853,6 +859,8 @@
                               :label="$t('selectCategoryLabel')"
                               v-model="sourceData.category_id"
                               @change="getSubCategory()"
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -870,6 +878,8 @@
                               item-value="sub_category_id"
                               :label="$t('subCategoryLabel')"
                               v-model="sourceData.sub_category_id"
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -944,6 +954,7 @@
                               :items="organization"
                               v-model="sourceData.organization"
                               :rules="Rules"
+                              required
                               dense
                               outlined
                               persistent-hint
@@ -968,6 +979,8 @@
                               v-model="sourceData.access"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -983,11 +996,11 @@
                           <h4>
                             <v-text-field
                               v-model="sourceData.contactor_name"
-                              :rules="Rules"
                               :placeholder="$t('agencyPlaceholder')"
                               outlined
                               dense
                               required
+                              :rules="Rules"
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1006,7 +1019,8 @@
                               :placeholder="$t('emailPlaceholder')"
                               outlined
                               dense
-                              :rules="Rules" required
+                              :rules="RuleEnglish"
+                              required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1046,6 +1060,8 @@
                                   </v-list-item-content>
                                 </v-list-item>
                               </template>
+                              :rules="Rules"
+                              required
                             </v-combobox>
                           </h4>
                         </v-flex>
@@ -1066,6 +1082,8 @@
                               rows="3"
                               row-height="20"
                               shaped
+                              required
+                              :rules="Rules"
                             ></v-textarea>
                           </h4>
                         </v-flex>
@@ -1081,8 +1099,9 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="[v => !!v || 'Please select one']"
+                              :rules="RuleChoices" 
                               column
+                              required
                             >
                               <v-radio
                                 v-for="checkbox in check"
@@ -1104,6 +1123,8 @@
                               outlined
                               dense
                               required
+                              required
+                              :rules="Rules"
                             />
                           </h4>
                         </v-flex>
@@ -1123,6 +1144,8 @@
                               v-model="sourceData.frequency"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1140,6 +1163,8 @@
                               :placeholder="$t('number_placeholder')"
                               outlined
                               dense
+                              required
+                              :rules="Rules"
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1158,6 +1183,8 @@
                               v-model="sourceData.geo_coverage"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1199,6 +1226,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -1234,6 +1262,7 @@
                               label=""
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1253,6 +1282,7 @@
                               label=""
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1291,6 +1321,7 @@
                               rows="4"
                               row-height="20"
                               shaped
+                              :rules="Rules" required
                             ></v-textarea>
                           </h5>
                         </v-flex>
@@ -1309,6 +1340,7 @@
                               :items="subporter"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1327,6 +1359,7 @@
                               :items="subunits"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1344,6 +1377,7 @@
                               :placeholder="$t('urlDetails')"
                               outlined
                               dense
+                              :rules="Rules" required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1365,6 +1399,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -1403,9 +1438,9 @@
                             >
                               <template v-slot:activator="{ on, attrs }">
                                 <v-text-field
-                                  :value="
-                                    convertToThaiDate(sourceData.created_date)
-                                  "
+                                  v-model="displayCreateDate"
+                                  :placeholder="'กรุณาเลือกวันที่'"
+                                  :rules="Rules"
                                   :label="$t('dateFormatLabel')"
                                   prepend-icon="mdi-calendar"
                                   readonly
@@ -1417,6 +1452,7 @@
                                 v-model="sourceData.created_date"
                                 :locale="currentLocale"
                                 @input="menu = false"
+                                :rules="Rules" required
                               ></v-date-picker>
                             </v-menu>
                           </h4>
@@ -1440,13 +1476,13 @@
                             >
                               <template v-slot:activator="{ on, attr }">
                                 <v-text-field
-                                  :value="
-                                    convertToThaiDate(sourceData.modified_date)
-                                  "
+                                  v-model="displayModifiedDate"
+                                  :placeholder="'กรุณาเลือกวันที่'"
+                                  :rules="Rules"
                                   :label="$t('dateFormatLabel')"
                                   prepend-icon="mdi-calendar"
                                   readonly
-                                  v-bind="attr"
+                                  v-bind="attrs"
                                   v-on="on"
                                 ></v-text-field>
                               </template>
@@ -1454,6 +1490,7 @@
                                 v-model="sourceData.modified_date"
                                 :locale="currentLocale"
                                 @input="menu1 = false"
+                                :rules="Rules" required
                               ></v-date-picker>
                             </v-menu>
                           </h4>
@@ -1511,6 +1548,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -1571,6 +1609,7 @@
                               :items="multiplier_unit"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1625,6 +1664,7 @@
                               :items="yesno"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1667,7 +1707,7 @@
                             <v-text-field
                               v-model="sourceData.source_id"
                               required
-                              :rules="RuleEnglish"
+                              :rules="Rules"
                               :label="$t('dataSetCodeLabel')"
                             ></v-text-field>
                           </h4>
@@ -1703,6 +1743,8 @@
                               :label="$t('selectCategoryLabel')"
                               v-model="sourceData.category_id"
                               @change="getSubCategory()"
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1720,6 +1762,8 @@
                               item-value="sub_category_id"
                               :label="$t('subCategoryLabel')"
                               v-model="sourceData.sub_category_id"
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1774,7 +1818,7 @@
                               :rules="Rules"
                               :placeholder="$t('examplePlaceholder')"
                               outlined
-                              required
+                              required                              
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1794,6 +1838,7 @@
                               :items="organization"
                               v-model="sourceData.organization"
                               :rules="Rules"
+                              required
                               dense
                               outlined
                               persistent-hint
@@ -1819,6 +1864,8 @@
                               v-model="sourceData.access"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1857,7 +1904,7 @@
                               :placeholder="$t('emailPlaceholder')"
                               outlined
                               dense
-                              :rules="Rules" required
+                              :rules="RuleEnglish" required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -1883,6 +1930,8 @@
                               multiple
                               persistent-hint
                               small-chips
+                              required
+                              :rules="Rules"
                             >
                               <template v-slot:no-data>
                                 <v-list-item>
@@ -1917,6 +1966,8 @@
                               rows="3"
                               row-height="20"
                               shaped
+                              required
+                              :rules="Rules"
                             ></v-textarea>
                           </h4>
                         </v-flex>
@@ -1932,8 +1983,9 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="[v => !!v || 'Please select one']"
+                              :rules="RuleChoices" 
                               column
+                              required
                             >
                               <v-radio
                                 v-for="checkbox in check"
@@ -1974,6 +2026,7 @@
                               v-model="sourceData.frequency"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -1991,6 +2044,7 @@
                               :placeholder="$t('number_placeholder')"
                               outlined
                               dense
+                              :rules="Rules" required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -2009,6 +2063,7 @@
                               v-model="sourceData.geo_coverage"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2050,6 +2105,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="RuleChoices" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -2085,6 +2141,7 @@
                               label=""
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2104,6 +2161,7 @@
                               label=""
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2143,6 +2201,7 @@
                               rows="4"
                               row-height="20"
                               shaped
+                              :rules="Rules" required
                             ></v-textarea>
                           </h5>
                         </v-flex>
@@ -2161,6 +2220,7 @@
                               :items="subporter"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2179,6 +2239,7 @@
                               :items="subunits"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2196,6 +2257,7 @@
                               :placeholder="$t('urlDetails')"
                               outlined
                               dense
+                              :rules="Rules" required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -2217,6 +2279,7 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              :rules="RuleChoices" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -2325,6 +2388,7 @@
                               :items="geo"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2343,6 +2407,7 @@
                               :items="scale"
                               dense
                               outlined
+                              :rules="Rules" required
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2361,6 +2426,7 @@
                               placeholder=""
                               outlined
                               dense
+                              :rules="Rules" required
                             ></v-text-field>
                           </h4>
                         </v-flex>
@@ -2779,7 +2845,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="[v => !!v || 'Please select one']"
+                              :rules="RuleChoices" required
                               column
                             >
                               <v-radio
@@ -2821,6 +2887,8 @@
                               v-model="sourceData.frequency"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2857,6 +2925,8 @@
                               v-model="sourceData.geo_coverage"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2898,6 +2968,8 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              required
+                              :rules="RuleChoices"
                             ></v-checkbox>
 
                             <v-checkbox
@@ -2933,6 +3005,8 @@
                               label=""
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2952,6 +3026,8 @@
                               label=""
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -2991,6 +3067,8 @@
                               rows="4"
                               row-height="20"
                               shaped
+                              required
+                              :rules="Rules"
                             ></v-textarea>
                           </h5>
                         </v-flex>
@@ -3009,6 +3087,8 @@
                               :items="subporter"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -3027,6 +3107,8 @@
                               :items="subunits"
                               dense
                               outlined
+                              required
+                              :rules="Rules"
                             ></v-select>
                           </h4>
                         </v-flex>
@@ -3066,6 +3148,8 @@
                               :value="format.value"
                               multiple
                               hide-details
+                              required
+                              :rules="RuleChoices"
                             ></v-checkbox>
 
                             <v-checkbox
@@ -3501,7 +3585,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="[v => !!v || 'Please select one']"
+                              :rules="RuleChoices" required
                               column
                             >
                               <v-radio
@@ -4276,6 +4360,7 @@ export default {
         (v) => /^[A-Za-z0-9_.]+$/.test(v) || "Please fill in English only.",
       ],
       Rules: [(v) => !!v || "Information is required"],
+      RuleChoices: [(v) => !!v || 'Please select one'],
       sourceType: null,
       uploadType: null,
       APITyps: null,
@@ -4436,13 +4521,20 @@ export default {
         return "";
       }
     },
-    displayDate: {
+    displayCreateDate: {
       get() {
         return this.sourceData.created_date
           ? this.convertToThaiDate(this.sourceData.created_date)
           : '';
       },
     },
+    displayModifiedDate: {
+      get() {
+        return this.sourceData.created_date
+          ? this.convertToThaiDate(this.sourceData.modified_date)
+          : '';
+      },
+    },    
   },
   watch: {
     sourceData(val) {
