@@ -194,6 +194,8 @@ import Organization from "@/components/admin/Organization/Organization";
 import Category from "@/components/admin/Category/Category";
 import APIConfiguration from "@/components/admin/api/apiconf";
 import APIManagement from "@/components/admin/api/apimgmt";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {

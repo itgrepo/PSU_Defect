@@ -24,8 +24,9 @@
           <v-btn color="success" :disabled="!valid" outline @click="GenAPI()">
             <v-icon left>save</v-icon>{{ $t('genapi') }} 
           </v-btn>
-          <v-btn color="success" :disabled="!valid" outline @click="DelAPI()">
-            <v-icon left>save</v-icon>{{ $t('delapi') }} 
+          <v-btn color="error" :disabled="!valid" outlined @click="DelAPI()">
+         <!-- ใช้ไอคอนถังขยะจาก Material Icons หรือ MDI -->
+            <v-icon left>mdi-delete</v-icon>{{ $t('delapi') }}
           </v-btn>
         </v-layout>
       </v-form>

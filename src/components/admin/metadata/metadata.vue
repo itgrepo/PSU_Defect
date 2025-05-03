@@ -113,7 +113,7 @@
                         <v-flex xs12 sm12 md7>
                           <h4>
                             <v-text-field label="รหัสชุดข้อมูลตัวอย่าง A001 เป็นภาษาอังกฤษหรือตัวเลขและห้ามเว้นวรรค"
-                              required :rules="Rule" v-model="sourceData.file_name" disabled>
+                              required :rules="Rules" v-model="sourceData.file_name" disabled>
                             </v-text-field>
                           </h4>
                         </v-flex> -->
@@ -203,7 +203,7 @@
                           <h4>
                             <v-text-field
                               v-model="sourceData.export_excel_name"
-                              :rules="Rule"
+                              :rules="Rules"
                               :placeholder="$t('examplePlaceholder')"
                               outlined
                               required
@@ -366,30 +366,32 @@
                         </v-flex>
                         <v-flex xs12 sm12 md7>
                           <h4>
-                            <v-checkbox
-                              v-for="checkbox in check"
-                              :key="checkbox.id"
+                            <v-radio-group
                               v-model="sourceData.objective"
-                              :value="checkbox.value"
-                              :label="checkbox.title"
-                               :rules="[v => v && v.length > 0 || 'Select at least one']" hide-details
-                            ></v-checkbox>
-                            <v-checkbox
-                              v-model="enabled1"
-                              :label="$t('others')"
-                              hide-details
-                            ></v-checkbox>
-                            <v-col cols="12">
-                              <v-text-field
-                                :disabled="!enabled1"
-                                :placeholder="$t('pleaseSpecify')"
-                                v-model="objective_other"
-                                outlined
-                                dense
-                                :rules="Rules" required
-                              ></v-text-field>
-                              <!-- {{objective}} -->
-                            </v-col>
+                              :rules="[v => !!v || 'Please select one']"
+                              column
+                            >
+                              <v-radio
+                                v-for="checkbox in check"
+                                :key="checkbox.id"
+                                :label="checkbox.title"
+                                :value="checkbox.value"
+                              />
+                              <v-radio
+                                :label="$t('others')"
+                                value="other"
+                              />
+                            </v-radio-group>
+
+                            <v-text-field
+                              v-if="sourceData.objective === 'other'"
+                              v-model="objective_other"
+                              :placeholder="$t('pleaseSpecify')"
+                              :rules="Rules"
+                              outlined
+                              dense
+                              required
+                            />
                           </h4>
                         </v-flex>
 
@@ -687,9 +689,9 @@
                             >
                               <template v-slot:activator="{ on, attrs }">
                                 <v-text-field
-                                  :value="
-                                    convertToThaiDate(sourceData.created_date)
-                                  "
+                                  v-model="displayDate"
+                                  :placeholder="'กรุณาเลือกวันที่'"
+                                  :rules="Rules"
                                   :label="$t('dateFormatLabel')"
                                   prepend-icon="mdi-calendar"
                                   readonly
@@ -724,13 +726,13 @@
                             >
                               <template v-slot:activator="{ on, attr }">
                                 <v-text-field
-                                  :value="
-                                    convertToThaiDate(sourceData.modified_date)
-                                  "
+                                  v-model="displayDate"
+                                  :placeholder="'กรุณาเลือกวันที่'"
+                                  :rules="Rules"
                                   :label="$t('dateFormatLabel')"
                                   prepend-icon="mdi-calendar"
                                   readonly
-                                  v-bind="attr"
+                                  v-bind="attrs"
                                   v-on="on"
                                 ></v-text-field>
                               </template>
@@ -831,7 +833,7 @@
                         <v-flex xs12 sm12 md7>
                           <h4>
                             <v-text-field label="กรอกรหัสชุดข้อมูลตัวอย่าง A001 เป็นภาษาอังกฤษหรือภาษาไทยและห้ามเว้นวรรค"
-                              required :rules="Rule" v-model="sourceData.file_name">
+                              required :rules="Rules" v-model="sourceData.file_name">
                             </v-text-field>
                           </h4>
                         </v-flex> -->
@@ -919,7 +921,7 @@
                           <h4>
                             <v-text-field
                               v-model="sourceData.export_excel_name"
-                              :rules="Rule"
+                              :rules="Rules"
                               :placeholder="$t('examplePlaceholder')"
                               outlined
                               required
@@ -1075,35 +1077,37 @@
                             ></v-subheader
                           >
                         </v-flex>
-                        <v-flex xs12 sm12 md7>
+                       <v-flex xs12 sm12 md7>
                           <h4>
-                            <v-checkbox
-                              v-for="checkbox in check"
-                              :key="checkbox.id"
+                            <v-radio-group
                               v-model="sourceData.objective"
-                              :value="checkbox.value"
-                              :label="checkbox.title"
-                               :rules="[v => v && v.length > 0 || 'Select at least one']" hide-details
-                            ></v-checkbox>
-                            <v-checkbox
-                              v-model="enabled1"
-                              :label="$t('others')"
-                              hide-details
-                            ></v-checkbox>
-                            <v-col cols="12">
-                              <v-text-field
-                                :disabled="!enabled1"
-                                :placeholder="$t('pleaseSpecify')"
-                                v-model="objective_other"
-                                outlined
-                                dense
-                                :rules="Rules" required
-                              ></v-text-field>
-                              <!-- {{objective}} -->
-                            </v-col>
+                              :rules="[v => !!v || 'Please select one']"
+                              column
+                            >
+                              <v-radio
+                                v-for="checkbox in check"
+                                :key="checkbox.id"
+                                :label="checkbox.title"
+                                :value="checkbox.value"
+                              />
+                              <v-radio
+                                :label="$t('others')"
+                                value="other"
+                              />
+                            </v-radio-group>
+
+                            <v-text-field
+                              v-if="sourceData.objective === 'other'"
+                              v-model="objective_other"
+                              :placeholder="$t('pleaseSpecify')"
+                              :rules="Rules"
+                              outlined
+                              dense
+                              required
+                            />
                           </h4>
                         </v-flex>
-
+                        
                         <v-flex xs12 sm12 md3 offset-md1>
                           <v-subheader
                             >{{ $t("data-relate-unit") }}:<span
@@ -1679,7 +1683,7 @@
                         <v-flex xs12 sm12 md7>
                           <h4>
                             <v-text-field label="กรอกรหัสชุดข้อมูลตัวอย่าง A001 เป็นภาษาอังกฤษหรือภาษาไทยและห้ามเว้นวรรค"
-                              required :rules="Rule" v-model="sourceData.file_name">
+                              required :rules="Rules" v-model="sourceData.file_name">
                             </v-text-field>
                           </h4>
                         </v-flex> -->
@@ -1767,7 +1771,7 @@
                           <h4>
                             <v-text-field
                               v-model="sourceData.export_excel_name"
-                              :rules="Rule"
+                              :rules="Rules"
                               :placeholder="$t('examplePlaceholder')"
                               outlined
                               required
@@ -1924,32 +1928,34 @@
                             ></v-subheader
                           >
                         </v-flex>
-                        <v-flex xs12 sm12 md7>
+                       <v-flex xs12 sm12 md7>
                           <h4>
-                            <v-checkbox
-                              v-for="checkbox in check"
-                              :key="checkbox.id"
+                            <v-radio-group
                               v-model="sourceData.objective"
-                              :value="checkbox.value"
-                              :label="checkbox.title"
-                               :rules="[v => v && v.length > 0 || 'Select at least one']" hide-details
-                            ></v-checkbox>
-                            <v-checkbox
-                              v-model="enabled1"
-                              :label="$t('others')"
-                              hide-details
-                            ></v-checkbox>
-                            <v-col cols="12">
-                              <v-text-field
-                                :disabled="!enabled1"
-                                :placeholder="$t('pleaseSpecify')"
-                                v-model="objective_other"
-                                outlined
-                                dense
-                                :rules="Rules" required
-                              ></v-text-field>
-                              <!-- {{objective}} -->
-                            </v-col>
+                              :rules="[v => !!v || 'Please select one']"
+                              column
+                            >
+                              <v-radio
+                                v-for="checkbox in check"
+                                :key="checkbox.id"
+                                :label="checkbox.title"
+                                :value="checkbox.value"
+                              />
+                              <v-radio
+                                :label="$t('others')"
+                                value="other"
+                              />
+                            </v-radio-group>
+
+                            <v-text-field
+                              v-if="sourceData.objective === 'other'"
+                              v-model="objective_other"
+                              :placeholder="$t('pleaseSpecify')"
+                              :rules="Rules"
+                              outlined
+                              dense
+                              required
+                            />
                           </h4>
                         </v-flex>
 
@@ -2769,32 +2775,34 @@
                             ></v-subheader
                           >
                         </v-flex>
-                        <v-flex xs12 sm12 md7>
+                       <v-flex xs12 sm12 md7>
                           <h4>
-                            <v-checkbox
-                              v-for="checkbox in check"
-                              :key="checkbox.id"
+                            <v-radio-group
                               v-model="sourceData.objective"
-                              :value="checkbox.value"
-                              :label="checkbox.title"
-                               :rules="[v => v && v.length > 0 || 'Select at least one']" hide-details
-                            ></v-checkbox>
-                            <v-checkbox
-                              v-model="enabled1"
-                              :label="$t('others')"
-                              hide-details
-                            ></v-checkbox>
-                            <v-col cols="12">
-                              <v-text-field
-                                :disabled="!enabled1"
-                                :placeholder="$t('pleaseSpecify')"
-                                v-model="objective_other"
-                                outlined
-                                dense
-                                :rules="Rules" required
-                              ></v-text-field>
-                              <!-- {{objective}} -->
-                            </v-col>
+                              :rules="[v => !!v || 'Please select one']"
+                              column
+                            >
+                              <v-radio
+                                v-for="checkbox in check"
+                                :key="checkbox.id"
+                                :label="checkbox.title"
+                                :value="checkbox.value"
+                              />
+                              <v-radio
+                                :label="$t('others')"
+                                value="other"
+                              />
+                            </v-radio-group>
+
+                            <v-text-field
+                              v-if="sourceData.objective === 'other'"
+                              v-model="objective_other"
+                              :placeholder="$t('pleaseSpecify')"
+                              :rules="Rules"
+                              outlined
+                              dense
+                              required
+                            />
                           </h4>
                         </v-flex>
 
@@ -3244,7 +3252,7 @@
                         <v-flex xs12 sm12 md7>
                           <h4>
                             <v-text-field label="กรอกรหัสชุดข้อมูลตัวอย่าง A001 เป็นภาษาอังกฤษหรือภาษาไทยและห้ามเว้นวรรค"
-                              required :rules="Rule" v-model="sourceData.file_name">
+                              required :rules="Rules" v-model="sourceData.file_name">
                             </v-text-field>
                           </h4>
                         </v-flex> -->
@@ -3332,7 +3340,7 @@
                           <h4>
                             <v-text-field
                               v-model="sourceData.export_excel_name"
-                              :rules="Rule"
+                              :rules="Rules"
                               :placeholder="$t('examplePlaceholder')"
                               outlined
                               required
@@ -3489,32 +3497,34 @@
                             ></v-subheader
                           >
                         </v-flex>
-                        <v-flex xs12 sm12 md7>
+                       <v-flex xs12 sm12 md7>
                           <h4>
-                            <v-checkbox
-                              v-for="checkbox in check"
-                              :key="checkbox.id"
+                            <v-radio-group
                               v-model="sourceData.objective"
-                              :value="checkbox.value"
-                              :label="checkbox.title"
-                               :rules="[v => v && v.length > 0 || 'Select at least one']" hide-details
-                            ></v-checkbox>
-                            <v-checkbox
-                              v-model="enabled1"
-                              :label="$t('others')"
-                              hide-details
-                            ></v-checkbox>
-                            <v-col cols="12">
-                              <v-text-field
-                                :disabled="!enabled1"
-                                :placeholder="$t('pleaseSpecify')"
-                                v-model="objective_other"
-                                outlined
-                                dense
-                                :rules="Rules" required
-                              ></v-text-field>
-                              <!-- {{objective}} -->
-                            </v-col>
+                              :rules="[v => !!v || 'Please select one']"
+                              column
+                            >
+                              <v-radio
+                                v-for="checkbox in check"
+                                :key="checkbox.id"
+                                :label="checkbox.title"
+                                :value="checkbox.value"
+                              />
+                              <v-radio
+                                :label="$t('others')"
+                                value="other"
+                              />
+                            </v-radio-group>
+
+                            <v-text-field
+                              v-if="sourceData.objective === 'other'"
+                              v-model="objective_other"
+                              :placeholder="$t('pleaseSpecify')"
+                              :rules="Rules"
+                              outlined
+                              dense
+                              required
+                            />
                           </h4>
                         </v-flex>
 
@@ -3978,8 +3988,10 @@ import dialog_add_data_source from "@/components/admin/metadata/dialog_add_data_
 import dialog_External from "@/components/admin/metadata/dialog_External";
 import { Encode, Decode } from "@/services";
 import { log } from "util";
+import ObjectiveRadioGroup from "@/components/admin/metadata/ObjectiveRadioGroup";
 export default {
   components: {
+    ObjectiveRadioGroup,
     edit,
     dialogData,
     dialogStat,
@@ -4423,6 +4435,13 @@ export default {
       } else {
         return "";
       }
+    },
+    displayDate: {
+      get() {
+        return this.sourceData.created_date
+          ? this.convertToThaiDate(this.sourceData.created_date)
+          : '';
+      },
     },
   },
   watch: {

@@ -297,7 +297,7 @@
         computed: {
             sortedListReport() {
                 return this.listReport.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            }
+            },
             userData() {
                 if (this.$cookies.isKey('information')) {
                     return JSON.parse(Decode.decode(this.$cookies.get('information')))
