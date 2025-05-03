@@ -10,6 +10,9 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.30",
     "@bachdgvn/vue-otp-input": "^1.0.8",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@material-ui/icons": "^3.0.2",
     "@mdi/font": "^6.9.96",
     "axios": "^0.18.0",

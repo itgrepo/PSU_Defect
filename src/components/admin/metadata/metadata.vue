@@ -4072,10 +4072,8 @@ import dialog_add_data_source from "@/components/admin/metadata/dialog_add_data_
 import dialog_External from "@/components/admin/metadata/dialog_External";
 import { Encode, Decode } from "@/services";
 import { log } from "util";
-import ObjectiveRadioGroup from "@/components/admin/metadata/ObjectiveRadioGroup";
 export default {
   components: {
-    ObjectiveRadioGroup,
     edit,
     dialogData,
     dialogStat,
