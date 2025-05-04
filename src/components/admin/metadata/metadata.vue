@@ -369,7 +369,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="RuleChoices" required
+                              :rules="Rules" required
                               column
                             >
                               <v-radio
@@ -1099,7 +1099,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="RuleChoices" 
+                              :rules="Rules"
                               column
                               required
                             >
@@ -1983,7 +1983,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="RuleChoices" 
+                              :rules="Rules"
                               column
                               required
                             >
@@ -2105,7 +2105,7 @@
                               :value="format.value"
                               multiple
                               hide-details
-                              :rules="RuleChoices" required
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -2279,7 +2279,7 @@
                               :value="format.value"
                               multiple
                               hide-details
-                              :rules="RuleChoices" required
+                              :rules="Rules" required
                             ></v-checkbox>
 
                             <v-checkbox
@@ -2845,7 +2845,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="RuleChoices" required
+                              :rules="Rules" required
                               column
                             >
                               <v-radio
@@ -2969,7 +2969,7 @@
                               multiple
                               hide-details
                               required
-                              :rules="RuleChoices"
+                              :rules="Rules"
                             ></v-checkbox>
 
                             <v-checkbox
@@ -3149,7 +3149,7 @@
                               multiple
                               hide-details
                               required
-                              :rules="RuleChoices"
+                              :rules="Rules"
                             ></v-checkbox>
 
                             <v-checkbox
@@ -3585,7 +3585,7 @@
                           <h4>
                             <v-radio-group
                               v-model="sourceData.objective"
-                              :rules="RuleChoices" required
+                              :rules="Rules" required
                               column
                             >
                               <v-radio
@@ -4358,7 +4358,6 @@ export default {
         (v) => /^[A-Za-z0-9_.]+$/.test(v) || "Please fill in English only.",
       ],
       Rules: [(v) => !!v || "Information is required"],
-      RuleChoices: [(v) => !!v || 'Please select one'],
       sourceType: null,
       uploadType: null,
       APITyps: null,

@@ -1,44 +1,8 @@
-version: '2'
+VUE_APP_API_BACKEND=https://lake.psu.ac.th:9999/api
+VUE_APP_API_BACKEND2=https://lake.psu.ac.th:9999/service
+VUE_APP_SECRETKEY=e9NHdT3GU6wBdWlw3RTqvrShGzyerRl4BaMhFeUI3v4j6U0opW5a19HQHDAHHCrhYXq8oG6D
 
-services:
-    web:
-        image: nginx:latest
-        ports:
-            # - "80:80"
-            - "9999:9999"
-        volumes:
-            - ./dist:/usr/share/nginx/html
-            - ./nginx.conf:/etc/nginx/conf.d/default.conf
-            # - /home/data/intelligist_portal/ssl/star.psu.crt:/etc/nginx/ssl/star.psu.crt
-            # - /home/data/intelligist_portal/ssl/star.psu.key:/etc/nginx/ssl/star.psu.key
-            - /home/administrator/portal_psu/intelligist_portal/ssl/star.psu.crt:/etc/nginx/ssl/star.psu.crt
-            - /home/administrator/portal_psu/intelligist_portal/ssl/star.psu.key:/etc/nginx/ssl/star.psu.key
-        restart: always
-networks:
-    code-network:
-        ipam:
-            config:
-                # - subnet: 10.20.8.0/24
-                - subnet: 10.0.0.0/16
-
-
-
-# networks:
-#     code-network:
-#         driver: bridge
-
-# services:
-#     web:
-#         image: nginx:latest
-#         ports:
-#             - "10390:10390"
-#         volumes:
-#             - ./dist:/usr/share/nginx/html
-#             - ./nginx.conf:/etc/nginx/conf.d/default.conf
-#         networks:
-#             - code-network
-
-# networks:
-#     code-network:
-#         driver: bridge
-
+VUE_APP_LINK=https://lake.psu.ac.th:9999/
+VUE_APP_CLIENT_ID=NYBUgwT6jF0KUatOUYvTmdOM5bbULxLr6DfaakZ2
+VUE_APP_CLIENT_SECRET=goUhpw8RFxcJP6PWit42QDfoobmQopJvYohG47InJm6xvegjEasJKpVnfBlAp0F5AEfp9BcqtieJRpCWBZJzD2p9OJSPaGbXaU0Q2z9ewB44EUEfY6ZXLGCcZp4QG7yy
+VUE_APP_REDIRECT_URI=https://lake.psu.ac.th:9999/loginOpenID
