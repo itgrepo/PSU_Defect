@@ -4528,7 +4528,7 @@ export default {
     },
     displayModifiedDate: {
       get() {
-        return this.sourceData.created_date
+        return this.sourceData.modified_date
           ? this.convertToThaiDate(this.sourceData.modified_date)
           : '';
       },

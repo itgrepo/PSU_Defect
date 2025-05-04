@@ -35,7 +35,7 @@
 <h4>
                 <v-select item-text="name" item-value="category_id" :items="itemCategory"
                   :label="$t('selectCategoryLabel')" v-model="sourceData.category_id"
-                  @change="getSubCategory()" :rules="[rules.required]"></v-select>
+                  @change="getSubCategory()"></v-select>
                   </h4>
               </v-flex>
               <v-flex xs12 sm12 md3 offset-md1>
@@ -44,7 +44,7 @@
               <v-flex xs12 sm12 md7>
                 <h4>
                  <v-select :items="itemSubCategory" item-text="sub_category_name" item-value="sub_category_id"
-                  :label="$t('subCategoryLabel')" v-model="sourceData.sub_category_id"  :rules="[rules.required]"></v-select>
+                  :label="$t('subCategoryLabel')" v-model="sourceData.sub_category_id" ></v-select>
                   </h4>
               </v-flex>
               <v-flex md1 pl-3>
@@ -71,7 +71,7 @@
                   v-model="sourceData.data_type"
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
 
@@ -120,16 +120,10 @@
                   item-text="title"
                   item-value="value"
                   :items="accessibility"
-  <v-select
-    v-model="sourceData.access"
-    :items="['public', 'private', 'internal']"
-    label="Accessibility"
-    :rules="[rules.required]"
-    required
-  ></v-select>
+                  v-model="sourceData.access"
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
               <v-flex xs12 sm12 md3 offset-md1>
@@ -159,7 +153,7 @@
                   outlined
                   dense
                   required
-                 :rules="[rules.required]"></v-text-field>
+                ></v-text-field>
                 </h4>
               </v-flex>
 
@@ -183,7 +177,7 @@
                   persistent-hint
                   small-chips
                   
-                 :rules="[rules.required]">
+                >
                   <template v-slot:no-data>
                     <v-list-item>
                       <v-list-item-content>
@@ -242,7 +236,7 @@
                     outlined
                     dense
                     required
-                   :rules="[rules.required]"></v-text-field>
+                  ></v-text-field>
                   <!-- {{objective}} -->
                 </v-col>
                 </h4>
@@ -258,7 +252,7 @@
                   v-model="sourceData.frequency"
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
 
@@ -272,7 +266,7 @@
                   :placeholder="$t('number_placeholder')"
                   outlined
                   dense
-                 :rules="[rules.required]"></v-text-field>
+                ></v-text-field>
                 </h4>
               </v-flex>
 
@@ -286,7 +280,7 @@
                   v-model="sourceData.geo_coverage"
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
 
@@ -336,7 +330,7 @@
                     outlined
                     dense
                     required
-                   :rules="[rules.required]"></v-text-field>
+                  ></v-text-field>
                 </v-col>
                 </h4>
               </v-flex>
@@ -352,7 +346,7 @@
                   label=""
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
 
@@ -367,7 +361,7 @@
                   label=""
                   dense
                   outlined
-                 :rules="[rules.required]"></v-select>
+                ></v-select>
                 </h4>
               </v-flex>
 
@@ -393,7 +387,7 @@
               </v-flex>
               <v-flex xs12 sm12 md7>
                 <h4>
-                <v-select v-model="sourceData.supporter" :items="subporter" dense outlined :rules="[rules.required]"></v-select>
+                <v-select v-model="sourceData.supporter" :items="subporter" dense outlined></v-select>
                 </h4>
               </v-flex>
 
@@ -402,7 +396,7 @@
               </v-flex>
               <v-flex xs12 sm12 md7>
                 <h4>
-                 <v-select v-model="sourceData.data_unit" :items="subunits" dense outlined :rules="[rules.required]"></v-select>
+                 <v-select v-model="sourceData.data_unit" :items="subunits" dense outlined></v-select>
                 </h4>
               </v-flex>
 
@@ -416,7 +410,7 @@
                   :placeholder="$t('urlDetails')"
                   outlined
                   dense
-                 :rules="[rules.required]"></v-text-field>
+                ></v-text-field>
                 </h4>
               </v-flex>
               
@@ -449,7 +443,7 @@
                     outlined
                     dense
                     required
-                   :rules="[rules.required]"></v-text-field>
+                  ></v-text-field>
                 </v-col>
                 </h4>
               </v-flex>
@@ -474,7 +468,7 @@
                       readonly
                       v-bind="attrs"
                       v-on="on"
-                     :rules="[rules.required]"></v-text-field>
+                    ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="sourceData.created_date"
@@ -505,7 +499,7 @@
                       readonly
                       v-bind="attr"
                       v-on="on"
-                     :rules="[rules.required]"></v-text-field>
+                    ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="sourceData.modified_date"
@@ -520,7 +514,7 @@
               </v-flex>
               <v-flex xs12 sm12 md7>
                 <h4>
-                 <v-select v-model="sourceData.high_value_dataset" :items="yesno" dense outlined :rules="[rules.required]"></v-select>
+                 <v-select v-model="sourceData.high_value_dataset" :items="yesno" dense outlined></v-select>
                 </h4>
               </v-flex>
 
@@ -529,7 +523,7 @@
               </v-flex>
               <v-flex xs12 sm12 md7>
                 <h4>
-                 <v-select v-model="sourceData.data_reference" :items="yesno" dense outlined :rules="[rules.required]"></v-select>
+                 <v-select v-model="sourceData.data_reference" :items="yesno" dense outlined></v-select>
                 </h4>
               </v-flex>
 
