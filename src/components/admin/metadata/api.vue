@@ -1,42 +1,68 @@
-<template lang="html">
-  <v-card flat class="card-add-link">
-    <v-layout>
-      <v-flex sm12 md12 xs12>
-        <v-radio-group v-model="addlink" row>
-          <v-radio :label="$t('genapi')"  :value="2"></v-radio>
-          <!-- <v-radio label="Add Link DashBoard" :value="3"></v-radio> -->
-        </v-radio-group>
-      </v-flex>
-    </v-layout>
-    <div v-if="addlink === 2">
-      <v-form ref="form" v-model="valid" lazy-validation>
+<template>
+  <v-app> <!-- Ensures Vuetify layout context -->
+    <v-main> <!-- Ensures proper content layout -->
+      <v-card flat class="card-add-link">
         <v-layout>
-          <v-flex sm3 md3 xs3>
-            <v-subheader>{{ $t('reprotid') }} </v-subheader>
-          </v-flex>
-          <v-flex sm6 md6 xs6>
-            <v-autocomplete :items="items" :filter="customFilter" item-text="file_name" :label="$t('reprotid')"
-              item-value="file_name" v-model="filename" @change="Getlink()"></v-autocomplete>
+          <v-flex sm12 md12 xs12>
+            <v-radio-group v-model="addlink" row>
+              <v-radio :label="$t('genapi')" :value="2"></v-radio>
+              <!-- <v-radio label="Add Link DashBoard" :value="3"></v-radio> -->
+            </v-radio-group>
           </v-flex>
         </v-layout>
-        <v-layout>
-          <v-spacer></v-spacer>
-          <v-btn color="success" :disabled="!valid" outline @click="GenAPI()">
-            <v-icon left>save</v-icon>{{ $t('genapi') }} 
-          </v-btn>
-          <v-btn color="error" :disabled="!valid" outlined @click="DelAPI()">
-         <!-- ใช้ไอคอนถังขยะจาก Material Icons หรือ MDI -->
-            <v-icon left>mdi-delete</v-icon>{{ $t('delapi') }}
-          </v-btn>
-        </v-layout>
-      </v-form>
-    </div>
-  </v-card>
+
+        <div v-if="addlink === 2">
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-layout>
+              <v-flex sm3 md3 xs3>
+                <v-subheader>{{ $t('reprotid') }}</v-subheader>
+              </v-flex>
+              <v-flex sm6 md6 xs6>
+                <v-autocomplete
+                  :items="items"
+                  :filter="customFilter"
+                  item-text="file_name"
+                  item-value="file_name"
+                  :label="$t('reprotid')"
+                  v-model="filename"
+                  @change="Getlink()"
+                />
+              </v-flex>
+            </v-layout>
+
+            <v-layout>
+              <v-spacer></v-spacer>
+              <v-btn color="success" :disabled="!valid" outline @click="dialog = true">
+                <v-icon left>save</v-icon>{{ $t('genapi') }}
+              </v-btn>
+              <v-btn color="error" :disabled="!valid" outlined @click="DelAPI()">
+                <v-icon left>mdi-delete</v-icon>{{ $t('delapi') }}
+              </v-btn>
+            </v-layout>
+          </v-form>
+        </div>
+      </v-card>
+
+      <!-- Dialog wrapped inside v-main/v-app context -->
+      <v-dialog v-model="dialog" max-width="400">
+        <v-card>
+          <v-card-title class="headline">ยืนยันการสร้าง API</v-card-title>
+          <v-card-text>คุณต้องการสร้าง API ใช่หรือไม่?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="confirmGenAPI">ใช่</v-btn>
+            <v-btn color="red darken-1" text @click="dialog = false">ไม่</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-main>
+  </v-app>
 </template>
 <script>
   export default {
     data() {
       return {
+        dialog: false,
         addlink: 2,
         valid: true,
         filename: "",
