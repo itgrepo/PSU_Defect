@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.dc1a0859d110a1b9eaefe5e6396e411a.js"
+  "/precache-manifest.7f533cd828cfe7e41cfd98870830306e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "opendata-fpo"});
